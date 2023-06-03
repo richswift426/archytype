@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
-import Sidebar from './layout/Sidebar';
-import ArchytypeSelection from './pages/archytype-selection';
-import ContentGeneration from './pages/content-generation';
-import Customization from './pages/customization';
-import ContentPreview from './pages/preview';
-import Analytics from './pages/analytics';
+import Sidebar from 'layout/Sidebar';
+import ArchytypeSelection from 'pages/archytype-selection';
+import ContentGeneration from 'pages/content-generation';
+import Customization from 'pages/customization';
+import ContentPreview from 'pages/preview';
+import Analytics from 'pages/analytics';
 
 import './App.css';
 
