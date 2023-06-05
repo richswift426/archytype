@@ -16,6 +16,7 @@ import { quizzes } from 'constants/quiz';
 export default function ArchytypeSelection() {
   const [archytype, setArchytype] = useState('');
   const [quizIndex, setQuizIndex] = useState(0);
+  const [completed, setCompleted] = useState(0);
   const [archytypeDesc, setArchytypeDesc] = useState(
     'Explanation of Archetype selected'
   );
@@ -29,6 +30,22 @@ export default function ArchytypeSelection() {
     setArchytype(event.target.value);
   };
 
+  const startQuiz = () => {
+    setQuiz(true);
+  };
+
+  const forwardQuiz = () => {
+    if (quizIndex + 1 < quizzes.length) {
+      setQuizIndex(quizIndex + 1);
+    }
+  };
+
+  const prevQuiz = () => {
+    if (quizIndex - 1 >= 0) {
+      setQuizIndex(quizIndex - 1);
+    }
+  };
+
   useEffect(() => {
     const selected = archetypes.filter((item) => item.name === archytype);
     if (selected.length) {
@@ -36,9 +53,9 @@ export default function ArchytypeSelection() {
     }
   }, [archytype]);
 
-  const startQuiz = () => {
-    setQuiz(true);
-  };
+  useEffect(() => {
+    setCompleted(((quizIndex + 1) / quizzes.length) * 100);
+  }, [quizIndex]);
 
   return (
     <>
@@ -77,7 +94,13 @@ export default function ArchytypeSelection() {
           </Grid>
         </Grid>
         {quiz ? (
-          <Quiz quiz={quizzes[quizIndex]} quizNum={quizIndex} />
+          <Quiz
+            quiz={quizzes[quizIndex]}
+            quizNum={quizIndex}
+            completed={completed}
+            prevQuiz={prevQuiz}
+            forwardQuiz={forwardQuiz}
+          />
         ) : (
           <Box sx={{ mt: 10, textAlign: 'center' }}>
             <div>Not sure what archetype your brand is?</div>
