@@ -34,9 +34,12 @@ export default function ArchytypeSelection() {
     setQuiz(true);
   };
 
-  const forwardQuiz = () => {
+  const forwardQuiz = (answer) => {
+    console.log(answer);
     if (quizIndex + 1 < quizzes.length) {
       setQuizIndex(quizIndex + 1);
+    } else {
+      setArchytype('The Creator');
     }
   };
 

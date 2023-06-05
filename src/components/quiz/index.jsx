@@ -19,10 +19,14 @@ export default function Quiz({
   forwardQuiz,
   prevQuiz,
 }) {
+  const [answer, setAnswer] = useState('');
   useEffect(() => {
     console.log(completed);
   }, [quiz]);
 
+  const handleRadioChange = (e) => {
+    setAnswer([quizNum, Number(e.target.value)]);
+  };
   return (
     <Container>
       <Typography
@@ -41,10 +45,10 @@ export default function Quiz({
       <p className="mb-2">{`Question #${quizNum + 1}*`}</p>
       <p className="mb-2">{quiz.question}</p>
       <FormControl>
-        <RadioGroup>
+        <RadioGroup onChange={handleRadioChange}>
           {quiz.samples.map((item, index) => (
             <FormControlLabel
-              value={item}
+              value={index}
               control={<Radio />}
               label={item}
               key={index}
@@ -54,10 +58,16 @@ export default function Quiz({
       </FormControl>
       <Box sx={{ marginTop: 4 }}>
         <ButtonGroup>
-          <Button variant="outlined" onClick={prevQuiz}>
-            Previous
-          </Button>
-          <Button variant="contained" color="success" onClick={forwardQuiz}>
+          {Boolean(quizNum) && (
+            <Button variant="outlined" onClick={prevQuiz}>
+              Previous
+            </Button>
+          )}
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => forwardQuiz(answer)}
+          >
             Next
           </Button>
         </ButtonGroup>
