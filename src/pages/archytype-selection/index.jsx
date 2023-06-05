@@ -9,14 +9,18 @@ import {
   Paper,
   Select,
 } from '@mui/material';
-
+import Quiz from 'components/quiz';
 import { archetypes } from 'constants/archetypes';
+import { quizzes } from 'constants/quiz';
 
 export default function ArchytypeSelection() {
   const [archytype, setArchytype] = useState('');
+  const [quizIndex, setQuizIndex] = useState(0);
   const [archytypeDesc, setArchytypeDesc] = useState(
     'Explanation of Archetype selected'
   );
+  const [quiz, setQuiz] = useState(false);
+
   const archetypesname = archetypes.map(({ name, explanation }) => {
     return name;
   });
@@ -31,6 +35,10 @@ export default function ArchytypeSelection() {
       setArchytypeDesc(selected[0].explanation);
     }
   }, [archytype]);
+
+  const startQuiz = () => {
+    setQuiz(true);
+  };
 
   return (
     <>
@@ -68,16 +76,21 @@ export default function ArchytypeSelection() {
             </Paper>
           </Grid>
         </Grid>
-        <Box sx={{ mt: 10, textAlign: 'center' }}>
-          <div>Not sure what archetype your brand is?</div>
-          <Button
-            sx={{ mt: 8, p: 4, fontSize: '1.5rem' }}
-            variant="outlined"
-            size="large"
-          >
-            Take the Quiz to find out yours
-          </Button>
-        </Box>
+        {quiz ? (
+          <Quiz quiz={quizzes[quizIndex]} quizNum={quizIndex} />
+        ) : (
+          <Box sx={{ mt: 10, textAlign: 'center' }}>
+            <div>Not sure what archetype your brand is?</div>
+            <Button
+              sx={{ mt: 8, p: 4, fontSize: '1.5rem' }}
+              variant="outlined"
+              size="large"
+              onClick={startQuiz}
+            >
+              Take the Quiz to find out yours
+            </Button>
+          </Box>
+        )}
       </Box>
     </>
   );
