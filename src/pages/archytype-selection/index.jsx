@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import {
+  Alert,
+  AlertTitle,
   Box,
   Button,
   FormControl,
+  Typography,
   Grid,
   InputLabel,
   MenuItem,
@@ -13,6 +16,10 @@ import Quiz from 'components/quiz';
 import { archetypes } from 'constants/archetypes';
 import { quizzes } from 'constants/quiz';
 
+const archyStats = archetypes.map(({ name, explanation }) => {
+  return [name, 0];
+});
+
 export default function ArchytypeSelection() {
   const [archytype, setArchytype] = useState('');
   const [quizIndex, setQuizIndex] = useState(0);
@@ -22,10 +29,6 @@ export default function ArchytypeSelection() {
   );
   const [quiz, setQuiz] = useState(false);
 
-  const archetypesname = archetypes.map(({ name, explanation }) => {
-    return name;
-  });
-
   const handleChange = (event) => {
     setArchytype(event.target.value);
   };
@@ -34,12 +37,37 @@ export default function ArchytypeSelection() {
     setQuiz(true);
   };
 
+  const calcArchytypes = (answer) => {
+    const [quizNum, answerIndex] = answer;
+    const { answers } = quizzes[quizNum];
+    const tmp = answers[answerIndex];
+    if (Array.isArray(tmp)) {
+      tmp.map((item) =>
+        archyStats.forEach((archy) => {
+          if (archy[0] == item) {
+            archy[1]++;
+          }
+        })
+      );
+    } else {
+      archyStats.forEach((archy) => {
+        if (archy[0] == tmp) {
+          archy[1]++;
+        }
+      });
+    }
+    const [result] = archyStats.sort((a, b) => b[1] - a[1]);
+    return result[0];
+  };
+
   const forwardQuiz = (answer) => {
-    console.log(answer);
-    if (quizIndex + 1 < quizzes.length) {
+    if (Number(quizIndex) + 1 < quizzes.length) {
+      calcArchytypes(answer);
       setQuizIndex(quizIndex + 1);
     } else {
-      setArchytype('The Creator');
+      const yourArchy = calcArchytypes(answer);
+      setQuiz(false);
+      setArchytype(yourArchy);
     }
   };
 
@@ -57,7 +85,7 @@ export default function ArchytypeSelection() {
   }, [archytype]);
 
   useEffect(() => {
-    setCompleted(((quizIndex + 1) / quizzes.length) * 100);
+    setCompleted((quizIndex / quizzes.length) * 100);
   }, [quizIndex]);
 
   return (
@@ -74,9 +102,9 @@ export default function ArchytypeSelection() {
                 label="Your ArchyType"
                 onChange={handleChange}
               >
-                {archetypesname.map((item, index) => (
-                  <MenuItem value={item} key={index}>
-                    {item}
+                {archetypes.map(({ name }, index) => (
+                  <MenuItem value={name} key={index}>
+                    {name}
                   </MenuItem>
                 ))}
               </Select>
@@ -104,6 +132,17 @@ export default function ArchytypeSelection() {
             prevQuiz={prevQuiz}
             forwardQuiz={forwardQuiz}
           />
+        ) : archytype ? (
+          <Alert severity="success" sx={{ marginTop: 4 }}>
+            <AlertTitle>Success</AlertTitle>
+            <Typography
+              variant="h4"
+              component="h4"
+              sx={{ marginTop: 4, marginBottom: 4 }}
+            >
+              Your archytype is — <strong>{archytype}!</strong>
+            </Typography>
+          </Alert>
         ) : (
           <Box sx={{ mt: 10, textAlign: 'center' }}>
             <div>Not sure what archetype your brand is?</div>

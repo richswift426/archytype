@@ -21,7 +21,7 @@ export default function Quiz({
 }) {
   const [answer, setAnswer] = useState('');
   useEffect(() => {
-    console.log(completed);
+    // console.log(completed);
   }, [quiz]);
 
   const handleRadioChange = (e) => {
@@ -43,10 +43,10 @@ export default function Quiz({
         sx={{ height: 15, borderRadius: 5, marginBottom: 4 }}
       />
       <p className="mb-2">{`Question #${quizNum + 1}*`}</p>
-      <p className="mb-2">{quiz.question}</p>
+      <p className="mb-2">{quiz?.question}</p>
       <FormControl>
         <RadioGroup onChange={handleRadioChange}>
-          {quiz.samples.map((item, index) => (
+          {quiz?.samples.map((item, index) => (
             <FormControlLabel
               value={index}
               control={<Radio />}
