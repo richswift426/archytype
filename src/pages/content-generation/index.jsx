@@ -1,21 +1,26 @@
 import { useState } from 'react';
-import { Box, TextField, Button, Grid } from '@mui/material';
+import axios from 'axios';
+import { Box, TextField, Button } from '@mui/material';
 
 import PromptField from 'components/prompt';
+
+const instance = axios.create({ baseURL: 'http://127.0.0.1:5000' });
 
 export default function ContentGeneration() {
   const [prompt, setPrompt] = useState('');
   const [story, setStory] = useState([]);
-  const [flag, setFlag] = useState(false);
 
   const handleChange = (e) => {
     setPrompt(e.target.value);
   };
 
-  const handleSubmit = () => {
-    // setFlag(true);
+  const handleSubmit = async () => {
+    const archytype = localStorage.getItem('archytype');
     if (prompt.length) {
-      setStory([...story, prompt]);
+      const {
+        data: { text },
+      } = await instance.post('api/content', { archytype, prompt });
+      setStory([...story, prompt, text]);
       setPrompt('');
     }
   };
