@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, Button, CircularProgress } from '@mui/material';
 
 import PromptField from 'components/prompt';
 
@@ -8,7 +8,8 @@ const instance = axios.create({ baseURL: 'http://127.0.0.1:5000' });
 
 export default function ContentGeneration() {
   const [prompt, setPrompt] = useState('');
-  const [story, setStory] = useState([]);
+  const [queries, setQueries] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
 
   const handleChange = (e) => {
     setPrompt(e.target.value);
@@ -16,12 +17,20 @@ export default function ContentGeneration() {
 
   const handleSubmit = async () => {
     const archytype = localStorage.getItem('archytype');
+
     if (prompt.length) {
-      const {
-        data: { text },
-      } = await instance.post('api/content', { archytype, prompt });
-      setStory([...story, prompt, text]);
+      const chats = queries;
+      setIsTyping(true);
+      chats.push({ role: 'user', content: prompt });
+      setQueries(chats);
       setPrompt('');
+
+      const {
+        data: { text: answer },
+      } = await instance.post('api/content', { archytype, prompt });
+      chats.push({ role: 'ai', content: answer });
+      setQueries(chats);
+      setIsTyping(false);
     }
   };
 
@@ -39,9 +48,18 @@ export default function ContentGeneration() {
           overflow: 'auto',
         }}
       >
-        {story.map((item, index) => (
-          <PromptField prompt={item} key={index} left={index % 2} />
-        ))}
+        {queries && queries.length
+          ? queries?.map(({ role, content }, index) => (
+              <>
+                <PromptField
+                  prompt={content}
+                  key={index}
+                  left={role === 'ai'}
+                />
+              </>
+            ))
+          : ''}
+        {isTyping && <CircularProgress disableShrink />}
       </Box>
       <Box sx={{ height: '20%' }}>
         <TextField

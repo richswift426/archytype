@@ -12,7 +12,7 @@ export default function PromptField({ prompt, left }) {
         alignSelf: left ? 'flex-start' : 'flex-end',
         width: 'fit-content',
         borderRadius: 2,
-        backgroundColor: '#eee',
+        backgroundColor: left ? '#ecf5de' : '#f3cbcb',
         padding: 2,
         marginBottom: 1,
       }}
