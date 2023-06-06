@@ -1,34 +1,49 @@
 import { useState } from 'react';
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, Button, Grid } from '@mui/material';
+
+import PromptField from 'components/prompt';
 
 export default function ContentGeneration() {
-  const [story, setStory] = useState('');
+  const [prompt, setPrompt] = useState('');
+  const [story, setStory] = useState([]);
+  const [flag, setFlag] = useState(false);
+
   const handleChange = (e) => {
-    setStory(e.target.value);
+    setPrompt(e.target.value);
   };
+
   const handleSubmit = () => {
-    console.log(story);
+    // setFlag(true);
+    if (prompt.length) {
+      setStory([...story, prompt]);
+      setPrompt('');
+    }
   };
 
   return (
     <>
       <Box
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
           height: '75%',
           border: 2,
           marginBottom: 2,
           borderRadius: 1,
           padding: 2,
+          overflow: 'auto',
         }}
       >
-        Here is ContentGeneration Page
+        {story.map((item, index) => (
+          <PromptField prompt={item} key={index} left={index % 2} />
+        ))}
       </Box>
       <Box sx={{ height: '20%' }}>
         <TextField
           multiline
           rows={4}
           label="Start Writing"
-          value={story}
+          value={prompt}
           fullWidth
           onChange={handleChange}
         />
