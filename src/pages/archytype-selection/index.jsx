@@ -33,16 +33,16 @@ export default function ArchytypeSelection() {
     setArchytype(event.target.value);
   };
 
-  const startQuiz = () => {
-    setQuiz(true);
-  };
+  useEffect(() => {
+    localStorage.setItem('archytype', archytype);
+  }, [archytype]);
 
   const calcArchytypes = (answer) => {
     const [quizNum, answerIndex] = answer;
     const { answers } = quizzes[quizNum];
-    const tmp = answers[answerIndex];
-    if (Array.isArray(tmp)) {
-      tmp.map((item) =>
+    const selectedAnswer = answers[answerIndex];
+    if (Array.isArray(selectedAnswer)) {
+      selectedAnswer.map((item) =>
         archyStats.forEach((archy) => {
           if (archy[0] == item) {
             archy[1]++;
@@ -51,7 +51,7 @@ export default function ArchytypeSelection() {
       );
     } else {
       archyStats.forEach((archy) => {
-        if (archy[0] == tmp) {
+        if (archy[0] == selectedAnswer) {
           archy[1]++;
         }
       });
@@ -150,7 +150,7 @@ export default function ArchytypeSelection() {
               sx={{ mt: 8, p: 4, fontSize: '1.5rem' }}
               variant="outlined"
               size="large"
-              onClick={startQuiz}
+              onClick={() => setQuiz(true)}
             >
               Take the Quiz to find out yours
             </Button>
