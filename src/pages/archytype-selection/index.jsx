@@ -35,8 +35,17 @@ export default function ArchytypeSelection() {
   };
 
   useEffect(() => {
-    localStorage.setItem('archytype', archytype);
-  }, [archytype]);
+    const savedArchtype = JSON.parse(localStorage.getItem('archytype'));
+    if (savedArchtype && savedArchtype?.length) {
+      setArchytype(savedArchtype);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('archytype', JSON.stringify(archytype));
+    };
+  });
 
   const calcArchytypes = (answer) => {
     const [quizNum, answerIndex] = answer;

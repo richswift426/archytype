@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 export default function PromptField({ prompt, left }) {
   useEffect(() => {
-    console.log(left);
+    // console.log(left);
   });
 
   return (
