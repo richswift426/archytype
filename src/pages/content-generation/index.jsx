@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, TextField, Button, CircularProgress } from '@mui/material';
 
@@ -10,6 +10,23 @@ export default function ContentGeneration() {
   const [prompt, setPrompt] = useState('');
   const [queries, setQueries] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const savedQueries = JSON.parse(localStorage.getItem('queries'));
+    if (savedQueries && savedQueries?.length) {
+      setQueries(savedQueries);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('queries', JSON.stringify(queries));
+    };
+  });
+
+  useEffect(() => {
+    localStorage.setItem('queries', JSON.stringify(queries));
+  }, [queries]);
 
   const handleChange = (e) => {
     setPrompt(e.target.value);
@@ -50,13 +67,7 @@ export default function ContentGeneration() {
       >
         {queries && queries.length
           ? queries?.map(({ role, content }, index) => (
-              <>
-                <PromptField
-                  prompt={content}
-                  key={index}
-                  left={role === 'ai'}
-                />
-              </>
+              <PromptField prompt={content} key={index} left={role === 'ai'} />
             ))
           : ''}
         {isTyping && <CircularProgress disableShrink />}

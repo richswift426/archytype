@@ -12,11 +12,12 @@ import {
   Paper,
   Select,
 } from '@mui/material';
+
 import Quiz from 'components/quiz';
 import { archetypes } from 'constants/archetypes';
 import { quizzes } from 'constants/quiz';
 
-const archyStats = archetypes.map(({ name, explanation }) => {
+const archyStats = archetypes.map(({ name }) => {
   return [name, 0];
 });
 
