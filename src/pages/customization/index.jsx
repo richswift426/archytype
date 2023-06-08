@@ -39,6 +39,10 @@ export default function Customization() {
     setb2bPersonas(e.target.value);
   };
 
+  const handleB2CBuyerPersonas = (e) => {
+    setb2cPersonas(e.target.value);
+  };
+
   useEffect(() => {
     console.log(exclusion);
     console.log(inclusion);
@@ -65,6 +69,22 @@ export default function Customization() {
           onChange={handleB2BBuyerPersonas}
         >
           {b2bBuyerPersonas.map(({ title }, index) => (
+            <MenuItem value={title} key={index}>
+              {title}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl sx={{ minWidth: '40%', marginTop: 4, marginLeft: 2 }}>
+        <InputLabel>B2C Buyer Personas</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={b2cPersonas}
+          label="B2C Buyer Personas"
+          onChange={handleB2CBuyerPersonas}
+        >
+          {b2cBuyerPersonas.map(({ title }, index) => (
             <MenuItem value={title} key={index}>
               {title}
             </MenuItem>
