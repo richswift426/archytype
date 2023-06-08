@@ -14,12 +14,22 @@ import {
 } from '@mui/material';
 
 import { b2bBuyerPersonas, b2cBuyerPersonas } from 'constants/personas';
+const formatTemplates = [
+  'Email',
+  'Blog',
+  'Facebook',
+  'Linkedin',
+  'Twitter',
+  'Instagram',
+  'Open Copy',
+];
 
 export default function Customization() {
   const [exclusion, setExclusion] = useState('');
   const [inclusion, setInClusion] = useState('');
   const [b2bPersonas, setb2bPersonas] = useState('');
   const [b2cPersonas, setb2cPersonas] = useState('');
+  const [format, setFormat] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,10 +53,25 @@ export default function Customization() {
     setb2cPersonas(e.target.value);
   };
 
+  const handleFormatChange = (e) => {
+    setFormat(e.target.value);
+  };
+
   useEffect(() => {
-    console.log(exclusion);
-    console.log(inclusion);
-  }, [exclusion, inclusion]);
+    const { inclusion, exclusion } = JSON.parse(
+      localStorage.getItem('options')
+    );
+    if (inclusion && exclusion) {
+      setInClusion(inclusion);
+      setExclusion(exclusion);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('options', JSON.stringify({ inclusion, exclusion }));
+    };
+  });
 
   return (
     <>
@@ -114,15 +139,15 @@ export default function Customization() {
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={exclusion}
+          value={format}
           label="Exclusion Words or Terms"
-          onChange={handleChange}
+          onChange={handleFormatChange}
         >
-          {/* {archetypes.map(({ name }, index) => (
-            <MenuItem value={name} key={index}>
-              {name}
+          {formatTemplates.map((item, index) => (
+            <MenuItem value={item} key={index}>
+              {item}
             </MenuItem>
-          ))} */}
+          ))}
         </Select>
       </FormControl>
     </>
