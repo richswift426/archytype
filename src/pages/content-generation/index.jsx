@@ -34,6 +34,7 @@ export default function ContentGeneration() {
 
   const handleSubmit = async () => {
     const archytype = localStorage.getItem('archytype');
+    const options = JSON.parse(localStorage.getItem('options'));
 
     if (prompt.length) {
       const chats = queries;
@@ -41,10 +42,9 @@ export default function ContentGeneration() {
       chats.push({ role: 'user', content: prompt });
       setQueries(chats);
       setPrompt('');
-
       const {
         data: { text: answer },
-      } = await instance.post('api/content', { archytype, prompt });
+      } = await instance.post('api/content', { archytype, prompt, options });
       chats.push({ role: 'ai', content: answer });
       setQueries(chats);
       setIsTyping(false);

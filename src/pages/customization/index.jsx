@@ -9,6 +9,7 @@ import {
   TextField,
   Grid,
   InputLabel,
+  ListSubheader,
   MenuItem,
   Select,
 } from '@mui/material';
@@ -27,8 +28,7 @@ const formatTemplates = [
 export default function Customization() {
   const [exclusion, setExclusion] = useState('');
   const [inclusion, setInClusion] = useState('');
-  const [b2bPersonas, setb2bPersonas] = useState('');
-  const [b2cPersonas, setb2cPersonas] = useState('');
+  const [personas, setPersonas] = useState('');
   const [format, setFormat] = useState('');
 
   const handleChange = (e) => {
@@ -45,12 +45,8 @@ export default function Customization() {
     }
   };
 
-  const handleB2BBuyerPersonas = (e) => {
-    setb2bPersonas(e.target.value);
-  };
-
-  const handleB2CBuyerPersonas = (e) => {
-    setb2cPersonas(e.target.value);
+  const handleBuyerPersonas = (e) => {
+    setPersonas(e.target.value);
   };
 
   const handleFormatChange = (e) => {
@@ -58,18 +54,21 @@ export default function Customization() {
   };
 
   useEffect(() => {
-    const { inclusion, exclusion } = JSON.parse(
-      localStorage.getItem('options')
-    );
-    if (inclusion && exclusion) {
-      setInClusion(inclusion);
-      setExclusion(exclusion);
+    const savedOptions = JSON.parse(localStorage.getItem('options'));
+    if (savedOptions && savedOptions?.inclusion && savedOptions?.exclusion) {
+      setInClusion(savedOptions.inclusion);
+      setExclusion(savedOptions.exclusion);
+      setPersonas(savedOptions.personas);
+      setFormat(savedOptions.format);
     }
   }, []);
 
   useEffect(() => {
     return () => {
-      localStorage.setItem('options', JSON.stringify({ inclusion, exclusion }));
+      localStorage.setItem(
+        'options',
+        JSON.stringify({ inclusion, exclusion, personas, format })
+      );
     };
   });
 
@@ -84,31 +83,26 @@ export default function Customization() {
           <strong>Here are the customization Options </strong>
         </Typography>
       </Alert>
-      <FormControl sx={{ minWidth: '40%', marginTop: 4 }}>
-        <InputLabel>B2B Buyer Personas</InputLabel>
+      <FormControl sx={{ minWidth: '60%', marginTop: 4 }}>
+        <InputLabel>Personas</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={b2bPersonas}
+          value={personas}
           label="B2B Buyer Personas"
-          onChange={handleB2BBuyerPersonas}
+          onChange={handleBuyerPersonas}
         >
+          <ListSubheader sx={{ fontSize: '1.2rem', color: '#abcced' }}>
+            B2B Buyer Personas
+          </ListSubheader>
           {b2bBuyerPersonas.map(({ title }, index) => (
             <MenuItem value={title} key={index}>
               {title}
             </MenuItem>
           ))}
-        </Select>
-      </FormControl>
-      <FormControl sx={{ minWidth: '40%', marginTop: 4, marginLeft: 2 }}>
-        <InputLabel>B2C Buyer Personas</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={b2cPersonas}
-          label="B2C Buyer Personas"
-          onChange={handleB2CBuyerPersonas}
-        >
+          <ListSubheader sx={{ fontSize: '1.2rem', color: '#abcced' }}>
+            B2C Buyer Personas
+          </ListSubheader>
           {b2cBuyerPersonas.map(({ title }, index) => (
             <MenuItem value={title} key={index}>
               {title}
