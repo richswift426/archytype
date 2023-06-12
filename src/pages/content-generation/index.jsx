@@ -4,7 +4,7 @@ import { Box, TextField, Button, CircularProgress } from '@mui/material';
 
 import PromptField from 'components/prompt';
 
-const instance = axios.create({ baseURL: '/api' });
+const instance = axios.create({ baseURL: 'http://67.207.86.221:5000/api' });
 
 export default function ContentGeneration() {
   const [prompt, setPrompt] = useState('');
