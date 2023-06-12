@@ -4,7 +4,7 @@ import { Box, TextField, Button, CircularProgress } from '@mui/material';
 
 import PromptField from 'components/prompt';
 
-const instance = axios.create({ baseURL: 'http://127.0.0.1:5000' });
+const instance = axios.create({ baseURL: 'http://localhost:5000/api' });
 
 export default function ContentGeneration() {
   const [prompt, setPrompt] = useState('');
@@ -44,7 +44,7 @@ export default function ContentGeneration() {
       setPrompt('');
       const {
         data: { text: answer },
-      } = await instance.post('api/content', { archytype, prompt, options });
+      } = await instance.post('/content', { archytype, prompt, options });
       chats.push({ role: 'ai', content: answer });
       setQueries(chats);
       setIsTyping(false);
