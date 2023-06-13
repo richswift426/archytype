@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function PromptField({ prompt, left }) {
   useEffect(() => {
@@ -9,15 +9,15 @@ export default function PromptField({ prompt, left }) {
   return (
     <Box
       sx={{
-        alignSelf: left ? 'flex-start' : 'flex-end',
-        width: 'fit-content',
         borderRadius: 2,
         backgroundColor: left ? '#ecf5de' : '#f3cbcb',
         padding: 2,
         marginBottom: 1,
       }}
     >
-      {prompt}
+      <Typography variant="h6" sx={{ whiteSpace: 'pre-wrap' }}>
+        {prompt}
+      </Typography>
     </Box>
   );
 }
