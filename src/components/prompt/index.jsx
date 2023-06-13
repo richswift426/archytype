@@ -15,7 +15,7 @@ export default function PromptField({ prompt, left }) {
         marginBottom: 1,
       }}
     >
-      <Typography variant="subtitle1" paragraph sx={{ whiteSpace: 'pre-wrap' }}>
+      <Typography variant="h6" sx={{ whiteSpace: 'pre-wrap' }}>
         {prompt}
       </Typography>
     </Box>
