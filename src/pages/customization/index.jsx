@@ -74,7 +74,7 @@ export default function Customization() {
 
   return (
     <>
-      <Alert severity="success">
+      {/* <Alert severity="success">
         <Typography
           variant="h4"
           component="h4"
@@ -82,8 +82,8 @@ export default function Customization() {
         >
           <strong>Here are the customization Options </strong>
         </Typography>
-      </Alert>
-      <FormControl sx={{ minWidth: '60%', marginTop: 4 }}>
+      </Alert> */}
+      <FormControl sx={{ minWidth: '80%', marginTop: 4 }}>
         <InputLabel>Personas</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
