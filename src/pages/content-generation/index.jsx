@@ -54,10 +54,10 @@ export default function ContentGeneration() {
   return (
     <>
       <Grid container sx={{ height: '100%' }} spacing={2}>
-        <Grid item md={3}>
+        <Grid item md={3} sx={{ height: '100%' }}>
           <Customization />
         </Grid>
-        <Grid item md={9}>
+        <Grid item md={9} sx={{ height: '100%' }}>
           <Box
             sx={{
               display: 'flex',
