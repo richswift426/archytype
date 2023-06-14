@@ -11,8 +11,11 @@ import {
   MenuItem,
   Paper,
   Select,
+  Snackbar,
+  IconButton,
 } from '@mui/material';
 
+import { Close as CloseIcon } from '@mui/icons-material';
 import Quiz from 'components/quiz';
 import { archetypes } from 'constants/archetypes';
 import { quizzes } from 'constants/quiz';
@@ -29,9 +32,19 @@ export default function ArchytypeSelection() {
     'Explanation of Archetype selected'
   );
   const [quiz, setQuiz] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event) => {
+    setOpen(true);
     setArchytype(event.target.value);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -120,14 +133,27 @@ export default function ArchytypeSelection() {
               </Select>
             </FormControl>
           </Grid>
+          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: '100%' }}
+            >
+              {`You selected ${archytype} archytype`}
+            </Alert>
+          </Snackbar>
           <Grid item md={8}>
             <Paper
               square
+              colorSecondary
+              elevation={3}
               sx={{
                 lineHeight: 2,
                 minWidth: 300,
-                minHeight: 200,
+                minHeight: 400,
                 p: 4,
+                color: '#42af73',
+                fontSize: '3rem',
               }}
             >
               {archytypeDesc}
