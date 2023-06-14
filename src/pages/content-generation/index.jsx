@@ -63,11 +63,12 @@ export default function ContentGeneration() {
               display: 'flex',
               flexDirection: 'column',
               height: '75%',
-              border: 2,
+              border: 4,
               marginBottom: 2,
-              borderRadius: 1,
+              borderRadius: 2,
               padding: 2,
               overflow: 'auto',
+              borderColor: '#160cb380',
             }}
           >
             {queries && queries.length
@@ -88,6 +89,7 @@ export default function ContentGeneration() {
               label="Start Writing"
               value={prompt}
               fullWidth
+              color="success"
               onChange={handleChange}
             />
             <Button
