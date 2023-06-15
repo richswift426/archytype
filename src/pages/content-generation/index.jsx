@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Box, TextField, Button, CircularProgress, Grid } from '@mui/material';
+
+import { Box, TextField, CircularProgress, Grid } from '@mui/material';
 import Customization from 'pages/customization';
 import PromptField from 'components/prompt';
 
 const instance = axios.create({ baseURL: 'http://67.207.86.221:5000/api' });
 
 export default function ContentGeneration() {
+  const messageEndRef = useRef(null);
   const [prompt, setPrompt] = useState('');
   const [queries, setQueries] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const savedQueries = JSON.parse(localStorage.getItem('queries'));
@@ -19,90 +22,111 @@ export default function ContentGeneration() {
   }, []);
 
   useEffect(() => {
+    scrollToBottom();
     return () => {
       localStorage.setItem('queries', JSON.stringify(queries));
     };
   });
 
   useEffect(() => {
+    scrollToBottom();
     localStorage.setItem('queries', JSON.stringify(queries));
   }, [queries]);
 
   const handleChange = (e) => {
+    if (error) {
+      setError(false);
+    }
     setPrompt(e.target.value);
   };
 
-  const handleSubmit = async () => {
-    const archytype = localStorage.getItem('archytype');
-    const options = JSON.parse(localStorage.getItem('options'));
+  const scrollToBottom = () => {
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-    if (prompt.length) {
-      const chats = queries;
-      setIsTyping(true);
-      chats.push({ role: 'user', content: prompt });
-      setQueries(chats);
-      setPrompt('');
-      const {
-        data: { text: answer },
-      } = await instance.post('/content', { archytype, prompt, options });
-      chats.push({ role: 'ai', content: answer });
-      setQueries(chats);
-      setIsTyping(false);
+  const handleKeyDown = async (e) => {
+    if (e.key === 'Enter') {
+      if (!prompt.length) {
+        setError(true);
+        return;
+      }
+
+      const archytype = localStorage.getItem('archytype');
+      const options = JSON.parse(localStorage.getItem('options'));
+
+      if (prompt.length) {
+        const chats = queries;
+        setIsTyping(true);
+        chats.push({ role: 'user', content: prompt });
+        setQueries(chats);
+        setPrompt('');
+        const {
+          data: { text: answer },
+        } = await instance.post('/content', { archytype, prompt, options });
+        chats.push({ role: 'ai', content: answer });
+        setQueries(chats);
+        setIsTyping(false);
+      }
     }
   };
 
   return (
-    <>
-      <Grid container sx={{ height: '100%' }} spacing={2}>
-        <Grid item md={3} sx={{ height: '100%' }}>
-          <Customization />
-        </Grid>
-        <Grid item md={9} sx={{ height: '100%' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              height: '75%',
-              border: 4,
-              marginBottom: 2,
-              borderRadius: 2,
-              padding: 2,
-              overflow: 'auto',
-              borderColor: '#160cb380',
-            }}
-          >
-            {queries && queries.length
-              ? queries?.map(({ role, content }, index) => (
-                  <PromptField
-                    prompt={content}
-                    key={index}
-                    left={role === 'ai'}
-                  />
-                ))
-              : ''}
-            {isTyping && <CircularProgress disableShrink />}
-          </Box>
-          <Box sx={{ height: '20%' }}>
-            <TextField
-              multiline
-              rows={4}
-              label="Start Writing"
-              value={prompt}
-              fullWidth
-              color="success"
-              onChange={handleChange}
-            />
-            <Button
-              variant="outlined"
-              size="large"
-              sx={{ mt: 1, p: 1 }}
-              onClick={handleSubmit}
-            >
-              SUBMIT
-            </Button>
-          </Box>
-        </Grid>
-      </Grid>
-    </>
+    <Grid container sx={{ height: '100%' }} spacing={2}>
+      <Customization />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '75%',
+          width: '100%',
+          boxShadow: 6,
+          marginBottom: 2,
+          borderRadius: 2,
+          padding: 1,
+          overflow: 'auto',
+          '::-webkit-scrollbar': {
+            width: '10px',
+          },
+          '::-webkit-scrollbar-thumb': {
+            height: '50px',
+            borderRadius: '10px',
+            backgroundColor: 'darkgrey',
+          },
+        }}
+      >
+        {queries && queries.length
+          ? queries?.map(({ role, content }, index) => (
+              <PromptField prompt={content} key={index} left={role === 'ai'} />
+            ))
+          : ''}
+        {isTyping && <CircularProgress disableShrink />}
+        <div ref={messageEndRef}></div>
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          marginX: 6,
+        }}
+      >
+        <TextField
+          autoFocus
+          label="Start Writing..."
+          value={prompt}
+          fullWidth
+          required
+          variant="filled"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          error={error}
+          inputProps={{
+            style: {
+              height: '40px',
+              fontSize: '1.5rem',
+              color: '#291b1b',
+            },
+          }}
+        />
+      </Box>
+    </Grid>
   );
 }

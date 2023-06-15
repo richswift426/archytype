@@ -46,10 +46,11 @@ export default function Sidebar() {
       <List component="nav" aria-labelledby="nested-list-subheader">
         {routes.map(({ to, content, icon }, key) => (
           <div className="link-item border-t-2" key={key}>
-            <Link to={to} className="text-white text-3xl">
+            <Link to={to} className="text-white text-2xl">
               <ListItemButton
                 sx={{
-                  padding: 4,
+                  padding: 3,
+                  fontSize: '1rem',
                   '&:hover, &:focus': { bgcolor: 'rgba(71, 98, 130, 0.2)' },
                 }}
               >

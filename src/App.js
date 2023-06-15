@@ -14,11 +14,11 @@ function App() {
     <div className="app">
       <Box sx={{ flexGrow: 1 }}>
         <Grid container>
-          <Grid item md={4}>
+          <Grid item md={2}>
             <Sidebar />
           </Grid>
-          <Grid item md={8}>
-            <div className="h-screen text-3xl text-gray-700 font-bold p-12">
+          <Grid item md={10}>
+            <div className="h-screen text-3xl text-gray-700 font-bold p-10">
               <Routes>
                 <Route path="selection" element={<ArchytypeSelection />} />
                 <Route path="engine" element={<ContentGeneration />} />

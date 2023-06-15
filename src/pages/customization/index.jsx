@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  Alert,
-  AlertTitle,
-  Box,
-  Button,
   FormControl,
-  Typography,
   TextField,
   Grid,
   InputLabel,
@@ -74,76 +69,76 @@ export default function Customization() {
 
   return (
     <>
-      {/* <Alert severity="success">
-        <Typography
-          variant="h4"
-          component="h4"
-          sx={{ marginTop: 4, marginBottom: 4 }}
-        >
-          <strong>Here are the customization Options </strong>
-        </Typography>
-      </Alert> */}
-      <FormControl sx={{ minWidth: '80%', marginTop: 4 }}>
-        <InputLabel>Personas</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={personas}
-          label="B2B Buyer Personas"
-          onChange={handleBuyerPersonas}
-        >
-          <ListSubheader sx={{ fontSize: '1.2rem', color: '#abcced' }}>
-            B2B Buyer Personas
-          </ListSubheader>
-          {b2bBuyerPersonas.map(({ title }, index) => (
-            <MenuItem value={title} key={index}>
-              {title}
-            </MenuItem>
-          ))}
-          <ListSubheader sx={{ fontSize: '1.2rem', color: '#abcced' }}>
-            B2C Buyer Personas
-          </ListSubheader>
-          {b2cBuyerPersonas.map(({ title }, index) => (
-            <MenuItem value={title} key={index}>
-              {title}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        name="exclusion"
-        multiline
-        label="Exclusion Words or Terms"
-        value={exclusion}
-        fullWidth
-        onChange={handleChange}
-        sx={{ marginBottom: 4, marginTop: 4 }}
-      />
-      <TextField
-        name="inclusion"
-        multiline
-        label="Inclusion Words or Terms"
-        value={inclusion}
-        fullWidth
-        onChange={handleChange}
-        sx={{ marginBottom: 4 }}
-      />
-      <FormControl sx={{ minWidth: '100%' }}>
-        <InputLabel>Format (Social, Blog, Description)</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={format}
-          label="Exclusion Words or Terms"
-          onChange={handleFormatChange}
-        >
-          {formatTemplates.map((item, index) => (
-            <MenuItem value={item} key={index}>
-              {item}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Grid container gap={2}>
+        <Grid item md={2} sm={5}>
+          <FormControl sx={{ minWidth: '100%' }}>
+            <InputLabel>Personas</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={personas}
+              label="B2B Buyer Personas"
+              onChange={handleBuyerPersonas}
+            >
+              <ListSubheader sx={{ fontSize: '1.2rem', color: '#abcced' }}>
+                B2B Buyer Personas
+              </ListSubheader>
+              {b2bBuyerPersonas.map(({ title }, index) => (
+                <MenuItem value={title} key={index}>
+                  {title}
+                </MenuItem>
+              ))}
+              <ListSubheader sx={{ fontSize: '1.2rem', color: '#abcced' }}>
+                B2C Buyer Personas
+              </ListSubheader>
+              {b2cBuyerPersonas.map(({ title }, index) => (
+                <MenuItem value={title} key={index}>
+                  {title}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item md={3} sm={5}>
+          <TextField
+            name="exclusion"
+            multiline
+            label="Exclusion Words or Terms"
+            value={exclusion}
+            fullWidth
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item md={3} sm={5}>
+          <TextField
+            name="inclusion"
+            multiline
+            label="Inclusion Words or Terms"
+            value={inclusion}
+            fullWidth
+            onChange={handleChange}
+            sx={{ marginBottom: 4 }}
+          />
+        </Grid>
+        <Grid item md={2} sm={5}>
+          <FormControl sx={{ minWidth: '100%' }}>
+            <InputLabel>Format (Social, Blog, Description)</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={format}
+              label="Exclusion Words or Terms"
+              onChange={handleFormatChange}
+            >
+              {formatTemplates.map((item, index) => (
+                <MenuItem value={item} key={index}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
     </>
   );
 }

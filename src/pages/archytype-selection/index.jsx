@@ -12,10 +12,8 @@ import {
   Paper,
   Select,
   Snackbar,
-  IconButton,
 } from '@mui/material';
 
-import { Close as CloseIcon } from '@mui/icons-material';
 import Quiz from 'components/quiz';
 import { archetypes } from 'constants/archetypes';
 import { quizzes } from 'constants/quiz';
@@ -67,14 +65,14 @@ export default function ArchytypeSelection() {
     if (Array.isArray(selectedAnswer)) {
       selectedAnswer.map((item) =>
         archyStats.forEach((archy) => {
-          if (archy[0] == item) {
+          if (archy[0] === item) {
             archy[1]++;
           }
         })
       );
     } else {
       archyStats.forEach((archy) => {
-        if (archy[0] == selectedAnswer) {
+        if (archy[0] === selectedAnswer) {
           archy[1]++;
         }
       });
@@ -148,9 +146,9 @@ export default function ArchytypeSelection() {
               colorSecondary
               elevation={3}
               sx={{
-                lineHeight: 2,
+                lineHeight: 1.3,
                 minWidth: 300,
-                minHeight: 400,
+                minHeight: 200,
                 p: 4,
                 color: '#42af73',
                 fontSize: '3rem',
