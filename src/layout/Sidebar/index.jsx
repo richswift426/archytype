@@ -27,7 +27,7 @@ const routes = [
   },
   {
     to: '/preview',
-    content: 'Content Preview and Editing',
+    content: 'Brainstorm',
     icon: <PreviewOutlined fontSize="large" sx={{ color: 'white' }} />,
   },
   {

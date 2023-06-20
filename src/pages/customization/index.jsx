@@ -17,7 +17,7 @@ const formatTemplates = [
   'Linkedin',
   'Twitter',
   'Instagram',
-  'Open Copy',
+  'Ad Copy',
 ];
 
 export default function Customization() {
