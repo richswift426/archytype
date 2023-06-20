@@ -131,7 +131,10 @@ export default function Customization() {
               onChange={handleFormatChange}
             >
               {formatTemplates.map((item, index) => (
-                <MenuItem value={item} key={index}>
+                <MenuItem
+                  value={item === 'Ad Copy' ? 'Google ad copy' : item}
+                  key={index}
+                >
                   {item}
                 </MenuItem>
               ))}
