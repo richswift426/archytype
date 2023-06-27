@@ -28,14 +28,19 @@ const AuthHeader = () => {
         alignItems: 'center',
         width: '100%',
         height: '10%',
-        padding: '48px',
+        paddingLeft: '32px',
         backgroundColor: '#070b10',
         color: 'white',
       }}
     >
       <Grid container>
         <Grid item md={2}>
-          <img src={Logo} alt="archey logo" className="mr-8" />
+          <img
+            src={Logo}
+            alt="archey logo"
+            className="mr-8"
+            style={{ width: '80%' }}
+          />
         </Grid>
         <Grid
           item

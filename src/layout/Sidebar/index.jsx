@@ -1,56 +1,60 @@
 import { Link } from 'react-router-dom';
-import { List, ListItemButton, ListItemIcon } from '@mui/material';
+import { Box, List, ListItemButton, ListItemIcon } from '@mui/material';
+
 import {
   Home,
-  Source,
   Analytics,
-  PreviewOutlined,
-  DashboardCustomizeOutlined,
+  SettingsSuggest,
+  EmojiObjectsOutlined,
+  History,
+  Delete,
 } from '@mui/icons-material';
 const routes = [
   {
-    to: '/selection',
-    content: 'Brand Archetype Selection',
+    to: '/home',
+    content: 'Home',
     icon: <Home fontSize="large" sx={{ color: 'white' }} />,
   },
   {
-    to: '/engine',
-    content: 'Content Generation Engine',
-    icon: <Source fontSize="large" sx={{ color: 'white' }} />,
-  },
-  {
-    to: '/custom',
-    content: 'Customization Options',
-    icon: (
-      <DashboardCustomizeOutlined fontSize="large" sx={{ color: 'white' }} />
-    ),
-  },
-  {
-    to: '/preview',
+    to: '/brainstorm',
     content: 'Brainstorm',
-    icon: <PreviewOutlined fontSize="large" sx={{ color: 'white' }} />,
+    icon: <EmojiObjectsOutlined fontSize="large" sx={{ color: 'white' }} />,
   },
   {
-    to: '/analytics',
-    content: 'Analytics and Performance Tracking',
-    icon: <Analytics fontSize="large" sx={{ color: 'white' }} />,
+    to: '/history',
+    content: 'History',
+    icon: <History fontSize="large" sx={{ color: 'white' }} />,
+  },
+  {
+    to: '/trash',
+    content: 'Trash',
+    icon: <Delete fontSize="large" sx={{ color: 'white' }} />,
+  },
+  {
+    to: '/settings',
+    content: 'Settings',
+    icon: <SettingsSuggest fontSize="large" sx={{ color: 'white' }} />,
   },
 ];
 
 export default function Sidebar() {
   return (
-    <div className="sidebar h-full bg-gray-800">
-      <div className="sidebar-header px-8 pt-8 mb-8 text-white font-bold text-4xl">
-        Sam's Portal +
-      </div>
+    <Box
+      className="sidebar h-full"
+      sx={{
+        backgroundColor: '#f74780',
+      }}
+    >
       <List component="nav" aria-labelledby="nested-list-subheader">
         {routes.map(({ to, content, icon }, key) => (
-          <div className="link-item border-t-2" key={key}>
+          <div className="link-item" key={key}>
             <Link to={to} className="text-white text-2xl">
               <ListItemButton
                 sx={{
-                  padding: 3,
-                  fontSize: '1rem',
+                  padding: 4,
+                  fontSize: '2rem',
+                  fontWeight: 700,
+                  color: '#fff',
                   '&:hover, &:focus': { bgcolor: 'rgba(71, 98, 130, 0.2)' },
                 }}
               >
@@ -61,6 +65,6 @@ export default function Sidebar() {
           </div>
         ))}
       </List>
-    </div>
+    </Box>
   );
 }
