@@ -68,7 +68,7 @@ export default function Home() {
                 mb: 6,
                 px: 8,
                 '&:hover': {
-                  backgroundColor: 'red',
+                  backgroundColor: '#f74780',
                 },
               }}
             >

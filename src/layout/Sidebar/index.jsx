@@ -39,7 +39,7 @@ const routes = [
 
 export default function Sidebar() {
   return (
-    <div className="sidebar h-screen bg-gray-800">
+    <div className="sidebar h-full bg-gray-800">
       <div className="sidebar-header px-8 pt-8 mb-8 text-white font-bold text-4xl">
         Sam's Portal +
       </div>
