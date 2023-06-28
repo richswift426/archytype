@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Avatar, Box, Grid } from '@mui/material';
 import Logo from 'assets/images/logo.png';
+import AvatarImage from 'assets/images/avatar.png';
 
 const NormalHeader = () => {
   return (
@@ -60,7 +61,7 @@ const AuthHeader = () => {
           </Link>
         </Grid>
         <Grid item md={2} sx={{ display: 'flex', alignItems: 'center' }}>
-          <Avatar>H</Avatar>
+          <Avatar src={AvatarImage} alt="avatar image" />
         </Grid>
       </Grid>
     </Box>

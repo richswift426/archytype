@@ -7,7 +7,7 @@ import ContentGeneration from 'pages/content-generation';
 import Customization from 'pages/customization';
 import ContentPreview from 'pages/preview';
 import Analytics from 'pages/analytics';
-
+import MainHome from 'pages/main-home';
 import './App.css';
 
 function App() {
@@ -17,11 +17,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="dashboard" element={<Dashboard />}>
-            <Route path="selection" element={<ArchytypeSelection />} />
-            <Route path="engine" element={<ContentGeneration />} />
-            <Route path="custom" element={<Customization />} />
-            <Route path="preview" element={<ContentPreview />} />
-            <Route path="analytics" element={<Analytics />} />
+            <Route path="home" element={<MainHome />} />
+            <Route path="brainstorm" element={<ArchytypeSelection />} />
+            <Route path="history" element={<ContentGeneration />} />
+            <Route path="trash" element={<Customization />} />
+            <Route path="settings" element={<ContentPreview />} />
           </Route>
         </Routes>
       </Box>
