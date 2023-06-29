@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
 import { Grid } from '@mui/material';
-import Sidebar from 'layout/Sidebar';
+import { Sidenav as Sidebar } from 'layout/Sidebar';
 
 export default function CustomRoute({ ...props }) {
   return (

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
-import Sidebar from 'layout/Sidebar';
+import { Sidenav as Sidebar } from 'layout/Sidebar';
 import Header from 'layout/Header';
 
 export default function Dashboard() {
