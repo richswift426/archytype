@@ -8,11 +8,18 @@ export default function Dashboard() {
     <Box sx={{ flexGrow: 1, height: '100%' }}>
       <Header authenticated={true} />
       <Grid container sx={{ height: '90%' }}>
-        <Grid item md={2}>
-          <Sidebar />
-        </Grid>
+        <Sidebar />
 
-        <Grid item md={10} sx={{ p: 4, backgroundColor: '#f9f9f9' }}>
+        <Grid
+          item
+          md={10}
+          sx={{
+            p: 4,
+            backgroundColor: '#f9f9f9',
+            flex: '1 !important',
+            maxWidth: 'fit-content !important',
+          }}
+        >
           <Outlet />
         </Grid>
       </Grid>

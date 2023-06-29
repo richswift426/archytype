@@ -54,9 +54,9 @@ export function Sidenav() {
           <KeyboardDoubleArrowRightIcon />
         )}
       </button>
-      {routes.map((item) => {
+      {routes.map((item, index) => {
         return (
-          <NavLink key={item.id} className={styles.sideitem} to={item.to}>
+          <NavLink key={index} className={styles.sideitem} to={item.to}>
             {item.icon}
             <span className={styles.linkText}>{item.content}</span>
           </NavLink>
