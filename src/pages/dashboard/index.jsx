@@ -14,10 +14,10 @@ export default function Dashboard() {
           item
           md={10}
           sx={{
-            p: 4,
+            p: 6,
             backgroundColor: '#f9f9f9',
             flex: '1 !important',
-            maxWidth: 'fit-content !important',
+            maxWidth: 'initial !important',
           }}
         >
           <Outlet />

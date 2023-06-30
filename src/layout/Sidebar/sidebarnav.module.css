@@ -5,7 +5,7 @@
   transition: width 0.3s ease-in-out;
   background-color: rgb(250 67 127);
   /* background-color: rgb(10, 25, 41); */
-  padding-top: 28px;
+  padding-top: 12px;
 }
 .sidenavClosed {
   composes: sidenav;
