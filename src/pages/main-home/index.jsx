@@ -22,7 +22,7 @@ const contentGeneration = [
   {
     title: 'Google Ad Copy',
     description: 'Draft high converting ad copy for your ad campaigns',
-    tag: 'google-ad-copy',
+    tag: 'ad-copy-generator',
   },
   { title: 'BrainStorm', description: '', tag: 'brainstorm' },
   { title: 'Future Module', description: '', tag: 'future-module' },
