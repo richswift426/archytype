@@ -53,10 +53,16 @@ const AuthHeader = () => {
             paddingLeft: '2rem',
           }}
         >
-          <Link to="/brand-guidlines" className="text-2xl mr-8 font-bold">
+          <Link
+            to="/dashboard/home/brand-guidelines"
+            className="text-2xl mr-8 font-bold"
+          >
             Brand Guidelines
           </Link>
-          <Link to="/archetype-explorer" className="text-2xl font-bold">
+          <Link
+            to="/dashboard/home/archetype-explorer"
+            className="text-2xl font-bold"
+          >
             Archetype Explorer
           </Link>
         </Grid>

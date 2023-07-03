@@ -3,7 +3,7 @@
   width: 320px;
   z-index: 9999;
   transition: width 0.3s ease-in-out;
-  background-color: rgb(250 67 127);
+  background-color: #fa437f;
   /* background-color: rgb(10, 25, 41); */
   padding-top: 12px;
 }

@@ -11,6 +11,7 @@ import Explorer from 'layout/Explorer';
 import AdCopyGenerator from 'pages/ad-copy-generator';
 import SocialMediaEngine from 'pages/social-media-engine';
 import BlogAuthor from 'pages/blog-author';
+import BrandGuidelines from 'pages/brand-guidelines';
 
 import './App.css';
 
@@ -32,6 +33,7 @@ function App() {
               path="home/social-media-engine"
               element={<SocialMediaEngine />}
             />
+            <Route path="home/brand-guidelines" element={<BrandGuidelines />} />
             <Route path="history" element={<ContentGeneration />} />
             <Route path="trash" element={<Customization />} />
             <Route path="settings" element={<ContentPreview />} />
