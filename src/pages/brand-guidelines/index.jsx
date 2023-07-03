@@ -1,5 +1,7 @@
-import { Box, Grid, Paper } from '@mui/material';
+import { Box, Button, Grid, Paper, TextField } from '@mui/material';
 import CommonExplorer from 'components/explorer';
+
+import Upload from 'assets/images/upload_icon.png';
 
 export default function BrandGuidelines() {
   return (
@@ -7,7 +9,82 @@ export default function BrandGuidelines() {
       title="Brand Guidelines"
       description="Teach Archey about your distinct brand style, tone, and voice, ensuring you never go off-brand ever again."
     >
-      <div className="brand-guidelines"></div>
+      <div className="brand-guidelines my-8">
+        <Grid container spacing={4}>
+          <Grid item md={3} sx={{ maxWidth: '488px' }}>
+            <Paper
+              elevation={3}
+              sx={{
+                height: '600px',
+                p: 4,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <p className="font-bold text-3xl text-center mb-8">File Upload</p>
+              <Box
+                className="border-dashed border-2 flex-1"
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
+                <img src={Upload} alt="upload_icon" className="mx-auto" />
+              </Box>
+            </Paper>
+          </Grid>
+          <Grid
+            item
+            md={9}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                width: '100%',
+                boxShadow: 6,
+                marginBottom: 4,
+                borderRadius: 2,
+                padding: 1,
+                overflow: 'auto',
+                '::-webkit-scrollbar': {
+                  width: '10px',
+                },
+                '::-webkit-scrollbar-thumb': {
+                  height: '50px',
+                  borderRadius: '10px',
+                  backgroundColor: 'darkgrey',
+                },
+              }}
+            ></Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <TextField fullWidth id="outlined-basic" variant="outlined" />
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  height: '56px',
+                  fontWeight: 700,
+                  fontSize: '20px',
+                  mx: 1,
+                  backgroundColor: '#FA437F',
+                }}
+              >
+                Send
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </div>
       <div className="templates">
         <Box>
           <p className="font-bold text-3xl mb-2">Templates</p>
