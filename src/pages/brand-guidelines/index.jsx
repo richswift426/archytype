@@ -1,9 +1,26 @@
+import { useRef } from 'react';
 import { Box, Button, Grid, Paper, TextField } from '@mui/material';
 import CommonExplorer from 'components/explorer';
 
 import Upload from 'assets/images/upload_icon.png';
 
 export default function BrandGuidelines() {
+  const inputRef = useRef(null);
+
+  const handleUpload = (e) => {
+    inputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const fileObj = e.target.files && e.target.files[0];
+    if (!fileObj) {
+      return;
+    }
+
+    console.log('fileObj is', fileObj);
+    e.target.value = null;
+  };
+
   return (
     <CommonExplorer
       title="Brand Guidelines"
@@ -20,6 +37,7 @@ export default function BrandGuidelines() {
                 display: 'flex',
                 flexDirection: 'column',
               }}
+              onClick={handleUpload}
             >
               <p className="font-bold text-3xl text-center mb-8">File Upload</p>
               <Box
@@ -27,6 +45,12 @@ export default function BrandGuidelines() {
                 sx={{ display: 'flex', alignItems: 'center' }}
               >
                 <img src={Upload} alt="upload_icon" className="mx-auto" />
+                <input
+                  hidden
+                  type="file"
+                  ref={inputRef}
+                  onChange={handleFileChange}
+                />
               </Box>
             </Paper>
           </Grid>
@@ -67,7 +91,12 @@ export default function BrandGuidelines() {
                 justifyContent: 'space-between',
               }}
             >
-              <TextField fullWidth id="outlined-basic" variant="outlined" />
+              <TextField
+                fullWidth
+                id="outlined-basic"
+                variant="outlined"
+                sx={{ borderColor: '#FA437F' }}
+              />
               <Button
                 variant="contained"
                 size="large"
