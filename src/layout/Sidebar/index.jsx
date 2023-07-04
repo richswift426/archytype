@@ -14,27 +14,27 @@ import {
 
 const routes = [
   {
-    to: '/dashboard/home',
+    to: '/home',
     content: 'Home',
     icon: <Home fontSize="large" sx={{ color: 'white' }} />,
   },
   {
-    to: '/dashboard/brainstorm',
+    to: '/brainstorm',
     content: 'Brainstorm',
     icon: <EmojiObjectsOutlined fontSize="large" sx={{ color: 'white' }} />,
   },
   {
-    to: '/dashboard/history',
+    to: '/history',
     content: 'History',
     icon: <History fontSize="large" sx={{ color: 'white' }} />,
   },
   {
-    to: '/dashboard/trash',
+    to: '/trash',
     content: 'Trash',
     icon: <Delete fontSize="large" sx={{ color: 'white' }} />,
   },
   {
-    to: '/dashboard/settings',
+    to: '/settings',
     content: 'Settings',
     icon: <SettingsSuggest fontSize="large" sx={{ color: 'white' }} />,
   },

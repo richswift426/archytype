@@ -22,7 +22,7 @@ function App() {
       <Box sx={{ flexGrow: 1, height: '100vh' }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route element={<Dashboard />}>
             <Route path="home" element={<MainHome />} />
             <Route path="home/email-explorer" element={<Explorer />} />
             <Route path="home/blog-author" element={<BlogAuthor />} />
