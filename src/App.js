@@ -12,6 +12,7 @@ import AdCopyGenerator from 'pages/ad-copy-generator';
 import SocialMediaEngine from 'pages/social-media-engine';
 import BlogAuthor from 'pages/blog-author';
 import BrandGuidelines from 'pages/brand-guidelines';
+import ArchetypeExplorer from 'pages/archetype-explorer';
 
 import './App.css';
 
@@ -34,6 +35,10 @@ function App() {
               element={<SocialMediaEngine />}
             />
             <Route path="home/brand-guidelines" element={<BrandGuidelines />} />
+            <Route
+              path="home/archetype-explorer"
+              element={<ArchetypeExplorer />}
+            />
             <Route path="history" element={<ContentGeneration />} />
             <Route path="trash" element={<Customization />} />
             <Route path="settings" element={<ContentPreview />} />
