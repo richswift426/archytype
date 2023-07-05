@@ -15,10 +15,15 @@ import {
 
 import Header from 'layout/Header';
 
+import { useNavigate } from 'react-router-dom';
+
 export default function Home() {
+  const navigator = useNavigate();
+
   const handleClick = () => {
-    alert('Hello!');
+    navigator('/home');
   };
+
   return (
     <Box sx={{ flexGrow: 1, height: '100%' }}>
       <Header />
@@ -71,6 +76,7 @@ export default function Home() {
                   backgroundColor: '#f74780',
                 },
               }}
+              onClick={handleClick}
             >
               Sign In
             </Button>

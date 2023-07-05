@@ -184,7 +184,7 @@ export default function Explorer({ title, description }) {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              height: '75%',
+              height: '500px',
               width: '100%',
               boxShadow: 6,
               marginBottom: 4,
@@ -261,23 +261,17 @@ export default function Explorer({ title, description }) {
           <Grid item={4}>
             <Paper
               sx={{ height: '150px', width: '300px', textAlign: 'center' }}
-            >
-              1
-            </Paper>
+            ></Paper>
           </Grid>
           <Grid item={4} sx={{ height: '200px' }}>
             <Paper
               sx={{ height: '150px', width: '300px', textAlign: 'center' }}
-            >
-              1
-            </Paper>
+            ></Paper>
           </Grid>
           <Grid item={4} sx={{ height: '200px' }}>
             <Paper
               sx={{ height: '150px', width: '300px', textAlign: 'center' }}
-            >
-              1
-            </Paper>
+            ></Paper>
           </Grid>
         </Grid>
       </Box>
