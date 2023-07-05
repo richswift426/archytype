@@ -2,9 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import Home from 'pages/home';
 import Dashboard from 'pages/dashboard';
-import ContentGeneration from 'pages/content-generation';
-import Customization from 'pages/customization';
-import ContentPreview from 'pages/preview';
 import MainHome from 'pages/main-home';
 import Explorer from 'layout/Explorer';
 import AdCopyGenerator from 'pages/ad-copy-generator';
@@ -12,6 +9,11 @@ import SocialMediaEngine from 'pages/social-media-engine';
 import BlogAuthor from 'pages/blog-author';
 import BrandGuidelines from 'pages/brand-guidelines';
 import ArchetypeExplorer from 'pages/archetype-explorer';
+import FutureModule from 'pages/future-module';
+import Brainstorm from 'pages/brainstorm';
+import History from 'pages/history';
+import Trash from 'pages/trash';
+import Setting from 'pages/settings';
 
 import './App.css';
 
@@ -24,6 +26,10 @@ function App() {
 
           <Route element={<Dashboard />}>
             <Route path="home" element={<MainHome />} />
+            <Route path="brainstorm" element={<Brainstorm />} />
+            <Route path="history" element={<History />} />
+            <Route path="trash" element={<Trash />} />
+            <Route path="setting" element={<Setting />} />
             <Route path="home/email-explorer" element={<Explorer />} />
             <Route path="home/blog-author" element={<BlogAuthor />} />
             <Route
@@ -34,14 +40,12 @@ function App() {
               path="home/social-media-engine"
               element={<SocialMediaEngine />}
             />
+            <Route path="home/future-module" element={<FutureModule />} />
             <Route path="home/brand-guidelines" element={<BrandGuidelines />} />
             <Route
               path="home/archetype-explorer"
               element={<ArchetypeExplorer />}
             />
-            <Route path="history" element={<ContentGeneration />} />
-            <Route path="trash" element={<Customization />} />
-            <Route path="settings" element={<ContentPreview />} />
           </Route>
         </Routes>
       </Box>

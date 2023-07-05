@@ -29,9 +29,9 @@ const contentGeneration = [
 ];
 
 const brandSettings = [
-  'Brand Guidelines',
-  'Archetype Explorer',
-  'Future Module',
+  { title: 'Brand Guidelines', tag: 'brand-guidelines' },
+  { title: 'Archetype Explorer', tag: 'archetype-explorer' },
+  { title: 'Future Module', tag: 'future-module' },
 ];
 
 export default function MainHome() {
@@ -58,21 +58,23 @@ export default function MainHome() {
       <Box sx={{ my: '24px' }}>
         <p className="font-bold text-3xl mb-8">Brand Settings</p>
         <Grid container sx={{ height: '50%' }} spacing={12}>
-          {brandSettings.map((item) => (
-            <Grid item md={4} key={item}>
-              <Card sx={{}}>
-                <CardHeader
-                  title={item}
-                  sx={{ textAlign: 'center' }}
-                ></CardHeader>
-                <CardContent sx={{ px: 4, pb: 4, pt: 0 }}>
-                  <img
-                    src={Line}
-                    alt="Line group"
-                    className="object-contain w-full"
-                  />
-                </CardContent>
-              </Card>
+          {brandSettings.map(({ title, tag }, index) => (
+            <Grid item md={4} key={index}>
+              <Link to={tag}>
+                <Card sx={{}}>
+                  <CardHeader
+                    title={title}
+                    sx={{ textAlign: 'center' }}
+                  ></CardHeader>
+                  <CardContent sx={{ px: 4, pb: 4, pt: 0 }}>
+                    <img
+                      src={Line}
+                      alt="Line group"
+                      className="object-contain w-full"
+                    />
+                  </CardContent>
+                </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>

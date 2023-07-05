@@ -34,7 +34,7 @@ const routes = [
     icon: <Delete fontSize="large" sx={{ color: 'white' }} />,
   },
   {
-    to: '/settings',
+    to: '/setting',
     content: 'Settings',
     icon: <SettingsSuggest fontSize="large" sx={{ color: 'white' }} />,
   },
