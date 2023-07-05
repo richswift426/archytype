@@ -62,8 +62,9 @@ export default function Explorer({ title, description }) {
   };
 
   const sendMessage = async () => {
+    const archytype = localStorage.getItem('archetype');
     const payload = {
-      archytype: 'The Hero',
+      archytype,
       recipient,
       email,
       personas,

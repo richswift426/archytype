@@ -50,6 +50,7 @@ export default function Explorer({ title, description }) {
   };
 
   const sendMessage = async () => {
+    const archytype = localStorage.getItem('archetype');
     const payload = {
       content,
       inclusion,
@@ -57,7 +58,7 @@ export default function Explorer({ title, description }) {
       wordCount,
       keyQuestions,
       topic,
-      archytype: 'The Hero',
+      archytype,
     };
 
     if (content.length) {

@@ -56,12 +56,13 @@ export default function Explorer({ title, description }) {
   };
 
   const sendMessage = async () => {
+    const archytype = localStorage.getItem('archetype');
     const payload = {
       content,
       personas,
       exclusion,
       inclusion,
-      archytype: 'The Hero',
+      archytype,
     };
 
     if (content.length) {

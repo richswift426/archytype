@@ -1,41 +1,16 @@
-import { Button, Grid, Box, Paper } from '@mui/material';
+import { Grid, Box, Paper } from '@mui/material';
 import Carousel from 'react-grid-carousel';
 
 import CommonExplorer from 'components/explorer';
-
+import { archetypes } from 'constants/archetypes';
 export default function ArchetypeExplorer() {
-  const items = [
-    {
-      name: 'Random Name #1',
-      description: 'Hello World!',
-    },
-    {
-      name: 'Random Name #2',
-      description: 'Hello World!',
-    },
-    {
-      name: 'Random Name #3',
-      description: 'Hello World!',
-    },
-    {
-      name: 'Random Name #4',
-      description: 'Hello World!',
-    },
-    {
-      name: 'Random Name #5',
-      description: 'Hello World!',
-    },
-    {
-      name: 'Random Name #6',
-      description: 'Hello World!',
-    },
-  ];
-
   const Item = (props) => {
     return (
       <Paper
+        onClick={(e) => selectArchetype(e, props.item.name)}
         variant="outlined"
         square
+        name={props.item.name}
         sx={{
           height: '200px',
           width: '100%',
@@ -52,6 +27,12 @@ export default function ArchetypeExplorer() {
         <p>{props.item.description}</p>
       </Paper>
     );
+  };
+
+  const selectArchetype = (e, item) => {
+    if (item) {
+      localStorage.setItem('archetype', item);
+    }
   };
 
   return (
@@ -77,7 +58,7 @@ export default function ArchetypeExplorer() {
               Select the option that best describes your brand:
             </p>
             <Carousel cols={4} rows={1} gap={10}>
-              {items.map((item, i) => (
+              {archetypes.map((item, i) => (
                 <Carousel.Item>
                   <Item key={i} item={item} />
                 </Carousel.Item>
