@@ -57,6 +57,7 @@ export default function Explorer({ title, description }) {
       wordCount,
       keyQuestions,
       topic,
+      archytype: 'The Hero',
     };
 
     if (content.length) {

@@ -67,3 +67,5 @@ export const emailTypes = [
   'Newsletter',
   'Transactional',
 ];
+
+export const socialTypes = ['Facebook', 'Twitter', 'Instagram', 'LinkedIn'];
