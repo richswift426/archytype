@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+
 export default function CommonExplorer({ title, description, children }) {
   return (
     <div className="common-explorer flex flex-col h-full justify-between">
