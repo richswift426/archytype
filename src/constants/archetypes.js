@@ -60,3 +60,10 @@ export const archetypes = [
       'Embodies leadership, authority, and a desire to create order and control',
   },
 ];
+
+export const emailTypes = [
+  'Welcome',
+  'Promotional',
+  'Newsletter',
+  'Transactional',
+];
