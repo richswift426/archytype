@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Grid, Box, Paper } from '@mui/material';
 import Carousel from 'react-grid-carousel';
 
@@ -5,6 +6,20 @@ import CommonExplorer from 'components/explorer';
 import { archetypes } from 'constants/archetypes';
 export default function ArchetypeExplorer() {
   const Item = (props) => {
+    const [active, setActive] = useState(false);
+    const [activeItem, setActiveItem] = useState('');
+
+    const selectArchetype = (e, item) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setActive(!active);
+      console.log(e.currentTarget.name);
+      setActiveItem(item);
+      if (item) {
+        localStorage.setItem('archetype', item);
+      }
+    };
+
     return (
       <Paper
         onClick={(e) => selectArchetype(e, props.item.name)}
@@ -21,18 +36,14 @@ export default function ArchetypeExplorer() {
           '&:hover': {
             cursor: 'pointer',
           },
+          border:
+            active && activeItem == props.item.name ? '4px solid #fa437f' : '',
         }}
       >
-        <h2>{props.item.name}</h2>
+        <h2 className="text-2xl font-bold">{props.item.name}</h2>
         <p>{props.item.description}</p>
       </Paper>
     );
-  };
-
-  const selectArchetype = (e, item) => {
-    if (item) {
-      localStorage.setItem('archetype', item);
-    }
   };
 
   return (

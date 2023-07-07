@@ -26,6 +26,7 @@ export default function Explorer({ title, description }) {
   const [personas, setPersonas] = useState('');
   const [output, setOutput] = useState('');
   const [messages, setMessages] = useState([]);
+  const [socialType, setSocialType] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState(false);
 
@@ -55,9 +56,13 @@ export default function Explorer({ title, description }) {
     }
   };
 
+  const handleSocialType = (e) => {
+    setSocialType(e.target.value);
+  };
   const sendMessage = async () => {
     const archytype = localStorage.getItem('archetype');
     const payload = {
+      socialType,
       content,
       personas,
       exclusion,
@@ -104,6 +109,8 @@ export default function Explorer({ title, description }) {
             label="Social Network"
             variant="outlined"
             sx={{ mb: 2 }}
+            value={socialType}
+            onChange={handleSocialType}
           >
             {socialTypes.map((item, index) => (
               <MenuItem value={item} key={index}>
