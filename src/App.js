@@ -14,6 +14,7 @@ import Brainstorm from 'pages/brainstorm';
 import History from 'pages/history';
 import Trash from 'pages/trash';
 import Setting from 'pages/settings';
+import SignUp from 'pages/sign-up';
 
 import './App.css';
 
@@ -23,7 +24,7 @@ function App() {
       <Box sx={{ flexGrow: 1, height: '100vh' }}>
         <Routes>
           <Route path="/" element={<Home />} />
-
+          <Route path="/sign-up" element={<SignUp />} />
           <Route element={<Dashboard />}>
             <Route path="home" element={<MainHome />} />
             <Route path="brainstorm" element={<Brainstorm />} />

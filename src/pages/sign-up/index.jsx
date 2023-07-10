@@ -1,31 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import {
-  Button,
-  Grid,
-  Box,
-  TextField,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-} from '@mui/material';
-
-import {
-  GoogleLoginButton,
-  MicrosoftLoginButton,
-} from 'react-social-login-buttons';
+import { Button, Grid, Box, TextField, FormGroup } from '@mui/material';
 
 import Header from 'layout/Header';
 import { useAuth } from 'hooks/useAuth';
 
-export default function Home() {
+export default function SignUp() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
-  const { login } = useAuth();
+  const { register } = useAuth();
 
   const handleClick = () => {
-    login({ email, password: pwd });
+    register({ name, email, password: pwd });
   };
 
   const handleChange = (e) => {
@@ -36,6 +24,10 @@ export default function Home() {
 
       case 'pwd':
         setPwd(e.target.value);
+        break;
+
+      case 'name':
+        setName(e.target.value);
         break;
 
       default:
@@ -58,10 +50,19 @@ export default function Home() {
             sx={{
               px: 24,
               pt: 6,
-              borderRight: '4px solid gray',
             }}
           >
             <FormGroup>
+              <div className="input-field mb-4">
+                <p className="mb-4">User Name</p>
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  value={name}
+                  name="name"
+                  onChange={handleChange}
+                />
+              </div>
               <div className="input-field mb-4">
                 <p className="mb-4">Email Address</p>
                 <TextField
@@ -82,16 +83,6 @@ export default function Home() {
                   onChange={handleChange}
                 />
               </div>
-              <FormControlLabel
-                sx={{
-                  my: 6,
-                  '&:focus': {
-                    boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-                  },
-                }}
-                control={<Checkbox defaultChecked size="large" />}
-                label="Remember Me"
-              />
             </FormGroup>
             <Button
               variant="contained"
@@ -101,7 +92,7 @@ export default function Home() {
                 fontSize: '2rem',
                 textTransform: 'none',
                 fontWeight: 700,
-                mb: 6,
+                my: 6,
                 px: 8,
                 '&:hover': {
                   backgroundColor: '#f74780',
@@ -109,30 +100,8 @@ export default function Home() {
               }}
               onClick={handleClick}
             >
-              Sign In
+              Sign Up
             </Button>
-            <p>
-              Don't have an account?{' '}
-              <Link to="/sign-up" className="underline">
-                Sign Up
-              </Link>
-            </p>
-          </Grid>
-          <Grid
-            item
-            md={6}
-            sm={12}
-            sx={{
-              px: 24,
-              pt: 6,
-            }}
-          >
-            <Box sx={{ mt: 6 }}>
-              <GoogleLoginButton onClick={handleClick} className="mt-40" />
-            </Box>
-            <Box sx={{ mt: 6 }}>
-              <MicrosoftLoginButton onClick={handleClick} />
-            </Box>
           </Grid>
         </Grid>
       </Box>

@@ -26,10 +26,23 @@ export const AuthProvider = ({ children }) => {
     navigate('/', { replace: true });
   };
 
+  const register = async (data) => {
+    try {
+      const {
+        data: { token },
+      } = await instance.post('/auth/register', data);
+      setUser(token);
+      navigate('/home', { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const value = useMemo(
     () => ({
       user,
       login,
+      register,
       logout,
     }),
     [user]
