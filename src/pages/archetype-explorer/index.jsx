@@ -4,6 +4,7 @@ import Carousel from 'react-grid-carousel';
 
 import CommonExplorer from 'components/explorer';
 import { archetypes } from 'constants/archetypes';
+
 export default function ArchetypeExplorer() {
   const Item = (props) => {
     const [active, setActive] = useState(false);

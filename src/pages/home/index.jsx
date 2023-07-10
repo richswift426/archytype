@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Button,
   Grid,
@@ -14,14 +17,30 @@ import {
 } from 'react-social-login-buttons';
 
 import Header from 'layout/Header';
-
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from 'hooks/useAuth';
 
 export default function Home() {
-  const navigator = useNavigate();
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+  const { login } = useAuth();
 
   const handleClick = () => {
-    navigator('/home');
+    login({ email, password: pwd });
+  };
+
+  const handleChange = (e) => {
+    switch (e.target.name) {
+      case 'email':
+        setEmail(e.target.value);
+        break;
+
+      case 'pwd':
+        setPwd(e.target.value);
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
@@ -45,11 +64,23 @@ export default function Home() {
             <FormGroup>
               <div className="input-field mb-4">
                 <p className="mb-4">Email Address</p>
-                <TextField fullWidth id="fullWidth" />
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  value={email}
+                  name="email"
+                  onChange={handleChange}
+                />
               </div>
               <div className="input-field">
                 <p className="mb-4">Password</p>
-                <TextField fullWidth id="fullWidth" />
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  name="pwd"
+                  value={pwd}
+                  onChange={handleChange}
+                />
               </div>
               <FormControlLabel
                 sx={{

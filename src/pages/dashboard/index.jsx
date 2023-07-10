@@ -5,6 +5,12 @@ import { Sidenav as Sidebar } from 'layout/Sidebar';
 import Header from 'layout/Header';
 
 export default function Dashboard() {
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <Box sx={{ flexGrow: 1, height: '100%' }}>
       <Header authenticated={true} />
