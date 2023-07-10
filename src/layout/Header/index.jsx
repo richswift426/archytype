@@ -3,6 +3,8 @@ import { Avatar, Box, Grid } from '@mui/material';
 import Logo from 'assets/images/logo.png';
 import AvatarImage from 'assets/images/avatar.png';
 
+import { useAuth } from 'hooks/useAuth';
+
 const NormalHeader = () => {
   return (
     <Box
@@ -21,6 +23,11 @@ const NormalHeader = () => {
 };
 
 const AuthHeader = () => {
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <Box
       sx={{
@@ -62,6 +69,12 @@ const AuthHeader = () => {
         </Grid>
         <Grid item md={2} sx={{ display: 'flex', alignItems: 'center' }}>
           <Avatar src={AvatarImage} alt="avatar image" />
+          <p
+            className="ml-2 font-bold text-xl cursor-pointer"
+            onClick={handleLogout}
+          >
+            Log out
+          </p>
         </Grid>
       </Grid>
     </Box>

@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   return (
     <Box sx={{ flexGrow: 1, height: '100%' }}>
-      <Header authenticated={true} />
+      <Header authenticated={user ? true : false} />
       <Grid container sx={{ height: '90%' }}>
         <Sidebar />
 
