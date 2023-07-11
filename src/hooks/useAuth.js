@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from './useLocalStorage';
+import { setAuth } from 'utils/setAuth';
 import instance from 'utils/axios';
 
 const AuthContext = createContext(null);
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
         data: { token },
       } = await instance.post('/auth/login', data);
       setUser(token);
+      setAuth(token);
       navigate('/home', { replace: true });
     } catch (error) {
       console.log(error);
@@ -23,6 +25,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    setAuth();
     navigate('/', { replace: true });
   };
 
