@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 import { useAuth } from 'hooks/useAuth';
 import { Sidenav as Sidebar } from 'layout/Sidebar';
