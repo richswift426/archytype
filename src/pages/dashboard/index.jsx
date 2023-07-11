@@ -1,14 +1,24 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 import { useAuth } from 'hooks/useAuth';
 import { Sidenav as Sidebar } from 'layout/Sidebar';
 import Header from 'layout/Header';
-
+import { setAuth } from 'utils/setAuth';
 export default function Dashboard() {
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setAuth(user);
+  });
 
   if (!user) {
-    return <Navigate to="/" />;
+    navigate('/', { replace: true });
+  }
+
+  if (user == 'null') {
+    navigate('/', { replace: true });
   }
 
   return (
