@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Box, Button, Grid, Paper, TextField } from '@mui/material';
 import CommonExplorer from 'components/explorer';
+import instance from 'utils/axios';
 
 import Upload from 'assets/images/upload_icon.png';
 
@@ -11,14 +12,19 @@ export default function BrandGuidelines() {
     inputRef.current.click();
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const fileObj = e.target.files && e.target.files[0];
     if (!fileObj) {
       return;
     }
-
-    console.log('fileObj is', fileObj);
-    e.target.value = null;
+    const formData = new FormData();
+    formData.append('brand', fileObj);
+    try {
+      await instance.post('/brand', formData);
+      e.target.value = null;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,6 +54,8 @@ export default function BrandGuidelines() {
                 <input
                   hidden
                   type="file"
+                  name="brand"
+                  accept=".pdf,.doc,.docx"
                   ref={inputRef}
                   onChange={handleFileChange}
                 />
