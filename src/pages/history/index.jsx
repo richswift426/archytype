@@ -9,7 +9,6 @@ export default function History() {
   const { user } = useAuth();
   useEffect(() => {
     async function fetchHistory() {
-      console.log(user);
       setAuth(user);
       const {
         data: { history },
