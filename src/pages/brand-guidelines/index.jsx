@@ -1,12 +1,25 @@
-import { useRef } from 'react';
-import { Box, Button, Grid, Paper, TextField } from '@mui/material';
+import { useState, useRef } from 'react';
+import {
+  Box,
+  Button,
+  Grid,
+  Paper,
+  TextField,
+  LinearProgress,
+  CircularProgress,
+} from '@mui/material';
 import CommonExplorer from 'components/explorer';
+import PromptField from 'components/prompt';
 import instance from 'utils/axios';
 
 import Upload from 'assets/images/upload_icon.png';
 
 export default function BrandGuidelines() {
   const inputRef = useRef(null);
+  const [question, setQuestion] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [isTyping, setTyping] = useState(false);
 
   const handleUpload = (e) => {
     inputRef.current.click();
@@ -20,10 +33,37 @@ export default function BrandGuidelines() {
     const formData = new FormData();
     formData.append('brand', fileObj);
     try {
+      setLoading(true);
       await instance.post('/brand', formData);
+      setLoading(false);
       e.target.value = null;
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleQuestion = (e) => {
+    setQuestion(e.target.value);
+  };
+
+  const askQuestion = async () => {
+    if (question.length) {
+      const chats = messages;
+      try {
+        setTyping(true);
+        chats.push({ role: 'user', content: question });
+        setQuestion('');
+        const {
+          data: {
+            answer: { text },
+          },
+        } = await instance.post('/brand/chat', { question });
+        chats.push({ role: 'ai', content: text });
+        setMessages(chats);
+        setTyping(false);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -55,11 +95,12 @@ export default function BrandGuidelines() {
                   hidden
                   type="file"
                   name="brand"
-                  accept=".pdf,.doc,.docx"
+                  accept=".pdf,.docx"
                   ref={inputRef}
                   onChange={handleFileChange}
                 />
               </Box>
+              {loading && <LinearProgress />}
             </Paper>
           </Grid>
           <Grid
@@ -91,7 +132,18 @@ export default function BrandGuidelines() {
                   backgroundColor: 'darkgrey',
                 },
               }}
-            ></Box>
+            >
+              {messages && messages.length
+                ? messages?.map(({ role, content }, index) => (
+                    <PromptField
+                      prompt={content}
+                      key={index}
+                      left={role === 'ai'}
+                    />
+                  ))
+                : ''}
+              {isTyping && <CircularProgress disableShrink />}
+            </Box>
             <Box
               sx={{
                 display: 'flex',
@@ -104,6 +156,8 @@ export default function BrandGuidelines() {
                 id="outlined-basic"
                 variant="outlined"
                 sx={{ borderColor: '#FA437F' }}
+                value={question}
+                onChange={handleQuestion}
               />
               <Button
                 variant="contained"
@@ -115,6 +169,7 @@ export default function BrandGuidelines() {
                   mx: 1,
                   backgroundColor: '#FA437F',
                 }}
+                onClick={askQuestion}
               >
                 Send
               </Button>
