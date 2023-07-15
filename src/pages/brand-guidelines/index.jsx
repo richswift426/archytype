@@ -54,11 +54,9 @@ export default function BrandGuidelines() {
         chats.push({ role: 'user', content: question });
         setQuestion('');
         const {
-          data: {
-            answer: { text },
-          },
+          data: { answer },
         } = await instance.post('/brand/chat', { question });
-        chats.push({ role: 'ai', content: text });
+        chats.push({ role: 'ai', content: answer });
         setMessages(chats);
         setTyping(false);
       } catch (error) {
