@@ -1,50 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid, Box, Paper } from '@mui/material';
 import Carousel from 'react-grid-carousel';
-
 import CommonExplorer from 'components/explorer';
+import Item from 'components/archetype-item';
 import { archetypes } from 'constants/archetypes';
+import { useAuth } from 'hooks/useAuth';
+import { setAuth } from 'utils/setAuth';
+import instance from 'utils/axios';
 
 export default function ArchetypeExplorer() {
-  const Item = (props) => {
-    const [active, setActive] = useState(false);
-    const [activeItem, setActiveItem] = useState('');
+  const [activeName, setActiveName] = useState(0);
+  const { user } = useAuth();
 
-    const selectArchetype = (e, item) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setActive(!active);
-      console.log(e.currentTarget.name);
-      setActiveItem(item);
-      if (item) {
-        localStorage.setItem('archetype', item);
+  useEffect(() => {
+    setAuth(user);
+    async function getArchetype() {
+      const {
+        data: { archetype },
+      } = await instance.post('/brand/archetype');
+      if (archetype !== null) {
+        setActiveName(archetype);
       }
-    };
+    }
 
-    return (
-      <Paper
-        onClick={(e) => selectArchetype(e, props.item.name)}
-        variant="outlined"
-        square
-        name={props.item.name}
-        sx={{
-          height: '200px',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          '&:hover': {
-            cursor: 'pointer',
-          },
-          border:
-            active && activeItem == props.item.name ? '4px solid #fa437f' : '',
-        }}
-      >
-        <h2 className="text-2xl font-bold">{props.item.name}</h2>
-        <p>{props.item.description}</p>
-      </Paper>
-    );
+    getArchetype();
+  }, []);
+
+  const handleClick = async (e) => {
+    setActiveName(e);
+    await instance.put('/brand/archetype', { archetype: e });
   };
 
   return (
@@ -69,10 +53,12 @@ export default function ArchetypeExplorer() {
             <p className="text-2xl pb-4">
               Select the option that best describes your brand:
             </p>
-            <Carousel cols={4} rows={1} gap={10}>
+            <Carousel cols={5} rows={1} gap={10}>
               {archetypes.map((item, i) => (
-                <Carousel.Item>
-                  <Item key={i} item={item} />
+                <Carousel.Item key={i}>
+                  <div onClick={() => handleClick(item.name)}>
+                    <Item item={item} activeName={activeName} />
+                  </div>
                 </Carousel.Item>
               ))}
             </Carousel>

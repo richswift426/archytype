@@ -59,6 +59,11 @@ export const archetypes = [
     explanation:
       'Embodies leadership, authority, and a desire to create order and control',
   },
+  {
+    name: 'My brand',
+    explanation:
+      'Embodies leadership, authority, and a desire to create order and control',
+  },
 ];
 
 export const emailTypes = [
